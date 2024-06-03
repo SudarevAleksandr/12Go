@@ -1,30 +1,29 @@
 <template>
-  <div class="container">
-    <!--Hello-->
-    <!--<Input :value="dateValue" clearable @input="onInput" placeholder="value" />
-    <Input v-model="date" clearable placeholder="v-model" />-->
-    <DateInput v-model="date2" clearable disabled label="Date2" minDate="1800-01-01" maxDate="2500-01-01" />
-    Output: {{ date }}
-    <br />
-    <br />
-    <DateInput v-model="date" clearable label="Date" minDate="1800-01-01" maxDate="2500-01-01" />
-    Output: {{ date }}
-    <br />
-    <br />
-    <Input v-model="test" clearable />
+  <div class="index_page_container">
+    <h4 class="title">Disabled input</h4>
+    <DateInput v-model="dateDisabled" class="input" clearable disabled label="Date" />
+    <div class="output_block">Output: {{ dateDisabled }}</div>
+
+    <h4 class="title">Limiting dates from 1800-01-01 to 2200-01-01</h4>
+    <DateInput v-model="date" class="input" clearable label="Date" minDate="1800-01-01" maxDate="2200-01-01" />
+    <div class="output_block">Output: {{ date }}</div>
+
+    <h4 class="title">Unlimited Date from 0200-01-01</h4>
+    <DateInput v-model="dateUnlimited" class="input" clearable label="Date" />
+    <div class="output_block">Output: {{ dateUnlimited }}</div>
   </div>
 </template>
 
 <script lang="ts">
 import DateInput from '@/components/atoms/dateInput/DateInput.vue'
 import Input from '@/components/atoms/input/Input.vue'
-import type { InputEvent, InputValue } from '@/components/atoms/input/Input.types'
+import type { InputValue } from '@/components/atoms/input/Input.types'
 import { defineComponent } from 'vue'
 
 interface DataInterface {
+  dateDisabled: InputValue
   date: InputValue
-  date2: InputValue
-  test: InputValue
+  dateUnlimited: InputValue
 }
 
 export default defineComponent({
@@ -38,29 +37,30 @@ export default defineComponent({
   },
   data(): DataInterface {
     return {
-      test: '12',
-      date2: '2024-14-03',
+      dateDisabled: '2024-10-03',
       date: null,
+      dateUnlimited: null,
     }
-  },
-  computed: {},
-  mounted() {},
-  unmounted() {},
-  watch: {
-    date(val) {
-      console.log('watch date>>>', val)
-    },
-  },
-  methods: {
-    //onInput(e: InputEvent) {
-    //  this.dateValue = e?.target.value || null
-    //},
   },
 })
 </script>
 
 <style lang="less" scoped>
-.container {
-  padding: 30px;
+.index_page_container {
+  padding: 40px 40px;
+  @media (max-width: 768px) {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+.title {
+  margin-bottom: 16px;
+}
+.input {
+  margin-bottom: 16px;
+}
+.output_block {
+  margin-bottom: 48px;
+  color: #949494;
 }
 </style>

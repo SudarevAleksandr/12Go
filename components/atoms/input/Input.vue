@@ -152,6 +152,9 @@ export default defineComponent({
       opacity: 0.4;
       user-select: none;
     }
+    .icon_container {
+      opacity: 0.4;
+    }
     .label {
       color: #a1a1a1;
     }

@@ -27,6 +27,16 @@ export function insertCharAfterPosition(string: string, position: number, char: 
   return string.slice(0, position) + char + string.slice(position)
 }
 
+export const getBrowserLocale = (): string => {
+  if (navigator.languages && navigator.languages.length) {
+    return navigator.languages[0]
+  } else if (navigator.language) {
+    return navigator.language
+  } else {
+    return 'en'
+  }
+}
+
 interface NumericMaskInterface {
   string: string
   pattern: string
@@ -55,7 +65,6 @@ export const numericMask = ({
   let i = 0
   let maskString = ''
 
-  //const regex = selectionEnd < string.length ? /[0-9\s]/ : /\d/
   const regex = /[0-9\s]/
   const isInsert = previousSelectionStart !== previousSelectionEnd
   const isEdit = selectionEnd < string.length
@@ -67,21 +76,15 @@ export const numericMask = ({
     string = removeCharAfterPosition(string, selectionEnd, regex)
 
   if (isEdit && isDeletion && isInsert) {
-    //console.log('string >>>', string)
-    //console.log('selectionEnd >>>', selectionEnd)
-    //console.log('deletedCharCount >>>', deletedCharCount)
     for (let i = selectionEnd; i < selectionEnd + deletedCharCount; i++) {
       const char = numericalSigns.includes(pattern[i]) ? ' ' : pattern[i]
       string = insertCharAfterPosition(string, i, char)
     }
-    //string = insertCharAfterPosition(string, selectionEnd, ' '.repeat(deletedCharCount))
-    //console.log('string >>>', string)
   }
 
   if (isEdit && isDeletion && !isInsert && isDigitInPattern)
     string = replaceFirstDigitAfterPosition(previousString, selectionEnd, ' ')
-  //console.log('string2 >>>', string)
-  //console.log('numericalSigns >>>', numericalSigns)
+
   while (string.length > 0) {
     if (!pattern[i]) break
 
