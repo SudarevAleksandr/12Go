@@ -6,13 +6,13 @@
 
 ✅ The v-model binding should always be of this format: "YYYY-MM-DD"
 
-✅ The component must utilize Vue@3.x and it's composition API
+✅ The component utilize Vue@3.x and it's composition API
 
-✅ The component must be written in TypeScript
+✅ The component written in TypeScript
 
-✅ The component must be SSR friendly
+✅ The component SSR friendly
 
-✅ Write at least 3 tests for the component
+✅ Written at least 3 tests for the component
 
 ✅ Takes into account the leap year </br>
 ![1](https://github.com/SudarevAleksandr/12Go/assets/39745168/9a8b3974-eee4-4d00-9302-460dffa8a0b2)
